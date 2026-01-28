@@ -1,90 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta charset="UTF-8" />
+        <title>AI Web Crawler</title>
         <style>
-            body {
-                font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-                background: #0f172a;
-                color: #e5e7eb;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-            }
-            .card {
-                background: #020617;
-                padding: 24px;
-                border-radius: 16px;
-                width: 500px;
-                box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-            }
-            h2 {
-                margin-bottom: 12px;
-            }
-            input {
-                width: 95%;
-                padding: 12px;
-                border-radius: 8px;
-                border: none;
-                margin-bottom: 12px;
-                font-size: 12px;
-            }
-            button{
-                padding: 12px 24px;
-                border: none;
-                border-radius: 8px;
-                background: #3b82f6;
-                color: white;
-                cursor: pointer;
-            }
-            #output{
-                margin-top: 16px;
-                background: #1e293b;
-                padding: 12px;
-                border-radius: 8px;
-                width: 95%;
-                height: 200px;
-                overflow-y: auto;
-                white-space: pre-wrap;
-            }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0f172a;
+            color: #e5e7eb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .card {
+            background: #020617;
+            padding: 24px;
+            border-radius: 16px;
+            width: 500px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        h2 {
+            margin-bottom: 12px;
+        }
+        input {
+            width: 95%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            margin-bottom: 12px;
+            font-size: 12px;
+        }
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            background: #3b82f6;
+            color: white;
+            cursor: pointer;
+        }
+        #output {
+            margin-top: 16px;
+            background: #1e293b;
+            padding: 12px;
+            border-radius: 8px;
+            width: 95%;
+            height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
         </style>
     </head>
     <body>
-    <div class="card">
-        <h2>AI Web Crawler</h2>
-        <input id="url" placeholder="Enter a URL to crawl..." />
-        <button onclick="crawl()">Crawl Website</button>
-        <pre id="output"></pre>
-    </div>
-    <script>
-        const API_ENDPOINT = "https://tsyqwd4wj7.execute-api.us-east-1.amazonaws.com/chat";
-        async function crawl() {
-            const url = document.getElementById("url").value;
-            const output = document.getElementById("output");
-            if (!url) {
-                output.textContent = "Please enter a URL.";
-                return;
-            }
-            output.textContent = "Crawling...";
-            try {
-                const res = await fetch(API_ENDPOINT, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                    message: `Crawl this URL: ${url}`
-                    })
-                });
-                const data = await res.json();
-                output.textContent = data.reply || data.error;
-            } 
-            catch (err) {
-                output.textContent = "Request failed.";
-            }
-        }
-    </script>
+        <div class="card">
+            <h2>AI Web Crawler</h2>
+            <input id="url" placeholder="Enter a URL to crawl..." />
+            <button id="crawlBtn">Crawl Website</button>
+            <pre id="output"></pre>
+        </div>
+
+        <script type="module" src="/script.js"></script>
     </body>
 </html>
