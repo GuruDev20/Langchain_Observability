@@ -1,0 +1,26 @@
+input:
+  flows:
+    - id: block_illegal
+      if:
+        contains_any:
+          - hack
+          - hacking
+          - steal
+          - fraud
+          - bank robbery
+          - exploit
+      then:
+        stop:
+          message: "This request violates safety policies and cannot be answered."
+
+output:
+  flows:
+    - id: safe_output
+      if:
+        contains_any:
+          - hack
+          - exploit
+          - illegal
+      then:
+        stop:
+          message: "Generated content violates safety policies."
